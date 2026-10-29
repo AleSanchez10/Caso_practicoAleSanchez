@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:replace="~{fragments/plantilla :: head}">
+    <title>Servicios Veterinarios</title>
+</head>
+
+<body>
+
+<header th:replace="~{fragments/plantilla :: header}"></header>
+<nav th:replace="~{fragments/plantilla :: navbar}"></nav>
+
+<main class="container mt-5">
+
+    <h2 class="mb-4">Servicios Veterinarios</h2>
+
+    <!-- Mensajes de resultado -->
+    <div th:if="${exito}" class="alert alert-success"
+         th:text="${exito}"></div>
+
+    <div th:if="${error}" class="alert alert-danger"
+         th:text="${error}"></div>
+
+    <!-- Agregar servicio -->
+    <a th:href="@{/servicios/nuevo}"
+       class="btn btn-success mb-3">
+        Agregar Servicio
+    </a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Tipo de Servicio</th>
+                <th>Precio</th>
+                <th>Duración</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="servicio : ${servicios}">
+                <td th:text="${servicio.nombre}"></td>
+                <td th:text="${servicio.tipoServicio.nombre}"></td>
+                <td th:text="${servicio.precio}"></td>
+                <td th:text="${servicio.duracionMinutos + ' minutos'}"></td>
+
+                <td>
+                    <a class="btn btn-warning btn-sm"
+                       th:href="@{/servicios/editar/{id}(id=${servicio.id})}">
+                        Editar
+                    </a>
+
+                    <button type="button"
+                            class="btn btn-danger btn-sm"
+                            data-bs-toggle="modal"
+                            th:attr="data-bs-target='#eliminarServicio' + ${servicio.id}">
+                        Eliminar
+                    </button>
+
+                    <div class="modal fade"
+                         th:id="'eliminarServicio' + ${servicio.id}"
+                         tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title">
+                                        Confirmar eliminación
+                                    </h5>
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="modal">
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    ¿Desea eliminar el servicio
+                                    <strong th:text="${servicio.nombre}"></strong>?
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button"
+                                            class="btn btn-secondary"
+                                            data-bs-dismiss="modal">
+                                        Cancelar
+                                    </button>
+
+                                    <form th:action="@{/servicios/eliminar/{id}(id=${servicio.id})}"
+                                          method="post">
+                                        <button type="submit"
+                                                class="btn btn-danger">
+                                            Confirmar
+                                        </button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</main>
+
+<footer th:replace="~{fragments/plantilla :: footer}"></footer>
+
+</body>
+</html>

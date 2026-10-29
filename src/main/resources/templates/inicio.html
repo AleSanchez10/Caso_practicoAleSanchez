@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:replace="~{fragments/plantilla :: head}">
+    <title>Inicio</title>
+</head>
+
+<body>
+
+<header th:replace="~{fragments/plantilla :: header}"></header>
+
+<nav th:replace="~{fragments/plantilla :: navbar}"></nav>
+
+<main class="container mt-5">
+
+    <div class="text-center">
+        <h2>Bienvenidos a Veterinaria Sanchez</h2>
+        <p class="lead">
+            Nos dedicamos al cuidado y bienestar de tus mascotas.
+        </p>
+    </div>
+
+    <div class="row mt-5">
+
+        <div class="col-md-6">
+            <h3>Sobre nuestra clínica</h3>
+            <p>
+                Ofrecemos atención veterinaria profesional,
+                consultas médicas, vacunación y estética.
+            </p>
+
+            <h4>Horario de atención</h4>
+            <p>Lunes a sábado: 8:00 a.m. - 6:00 p.m.</p>
+
+            <h4>Ubicación</h4>
+            <p>Heredia, Costa Rica</p>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="text-success">Promoción del mes</h3>
+                    <h4>Paquete Cachorro Feliz</h4>
+                    <p>
+                        Consulta general y orientación
+                        sobre el cuidado de tu cachorro.
+                    </p>
+                    <a th:href="@{/servicios}"
+                       class="btn btn-success">
+                        Ver servicios
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="mt-5 text-center">
+        <h3>Cuidado de nuestras mascotas</h3>
+
+        <iframe
+            class="w-100 rounded"
+            style="max-width: 700px; height: 350px;"
+            src="https://www.youtube.com/embed/TbgB5zH8_3E?si=HLHpZlxIOs2AJ2iQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>"
+            title="Video sobre cuidado de mascotas"
+            allowfullscreen>
+        </iframe>
+    </section>
+
+</main>
+
+<footer th:replace="~{fragments/plantilla :: footer}"></footer>
+
+</body>
+</html>

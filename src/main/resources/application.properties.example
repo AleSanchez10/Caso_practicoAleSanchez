@@ -1,0 +1,24 @@
+# Copiar como application.properties y configurar la base de datos local.
+# No guardar credenciales reales en este archivo de ejemplo.
+
+spring.application.name=sanchez
+
+# Puerto de la aplicación
+server.port=8086
+
+# Conexion con MySQL
+spring.datasource.url=${DB_URL:jdbc:mysql://localhost:3306/veterinaria}
+spring.datasource.username=${DB_USERNAME:usuario_local}
+spring.datasource.password=${DB_PASSWORD:}
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# Configuracion de JPA
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.show-sql=true
+
+# Configuracion de Thymeleaf
+spring.thymeleaf.cache=false
+# Configuracion de mensajes
+spring.messages.basename=messages
+spring.messages.encoding=UTF-8
+spring.messages.fallback-to-system-locale=false

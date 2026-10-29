@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:replace="~{fragments/plantilla :: head}">
+    <title>Tipos de Servicio</title>
+</head>
+
+<body>
+
+<header th:replace="~{fragments/plantilla :: header}"></header>
+
+<nav th:replace="~{fragments/plantilla :: navbar}"></nav>
+
+<main class="container mt-5">
+
+    <h2 class="mb-4">Tipos de Servicio</h2>
+
+    <div th:if="${exito}" class="alert alert-success"
+         th:text="${exito}">
+    </div>
+
+    <div th:if="${error}" class="alert alert-danger"
+         th:text="${error}">
+    </div>
+
+    <a th:href="@{/tipos/nuevo}"
+       class="btn btn-success mb-3">
+        Agregar Tipo de Servicio
+    </a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Cantidad de servicios</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="tipo : ${tipos}">
+                <td th:text="${tipo.id}"></td>
+                <td th:text="${tipo.nombre}"></td>
+                <td th:text="${tipo.descripcion}"></td>
+                <td th:text="${#lists.size(tipo.servicios)}"></td>
+
+                <td>
+                    <a class="btn btn-warning btn-sm"
+                       th:href="@{/tipos/editar/{id}(id=${tipo.id})}">
+                        Editar
+                    </a>
+
+                    <button type="button"
+                            class="btn btn-danger btn-sm"
+                            data-bs-toggle="modal"
+                            th:attr="data-bs-target='#eliminarTipo' + ${tipo.id}">
+                        Eliminar
+                    </button>
+
+                    <div class="modal fade"
+                         th:id="'eliminarTipo' + ${tipo.id}"
+                         tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title">
+                                        Confirmar eliminación
+                                    </h5>
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="modal">
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    ¿Desea eliminar este tipo de servicio?
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button"
+                                            class="btn btn-secondary"
+                                            data-bs-dismiss="modal">
+                                        Cancelar
+                                    </button>
+
+                                    <form th:action="@{/tipos/eliminar/{id}(id=${tipo.id})}"
+                                          method="post">
+                                        <button type="submit"
+                                                class="btn btn-danger">
+                                            Eliminar
+                                        </button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</main>
+
+<footer th:replace="~{fragments/plantilla :: footer}"></footer>
+
+</body>
+</html>

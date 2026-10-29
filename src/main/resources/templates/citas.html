@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:replace="~{fragments/plantilla :: head}">
+    <title>Citas Programadas</title>
+</head>
+
+<body>
+
+<header th:replace="~{fragments/plantilla :: header}"></header>
+<nav th:replace="~{fragments/plantilla :: navbar}"></nav>
+
+<main class="container mt-5">
+
+    <h2 class="mb-4">Citas Programadas</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Mascota</th>
+                    <th>Propietario</th>
+                    <th>Fecha</th>
+                    <th>Servicio</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="cita : ${citas}">
+
+                    <td th:text="${cita.nombreMascota}"></td>
+
+                    <td th:text="${cita.nombrePropietario}"></td>
+
+                    <td th:text="${#temporals.format(cita.fecha, 'dd/MM/yyyy')}"></td>
+
+                    <td th:text="${cita.servicio.nombre}"></td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+<footer th:replace="~{fragments/plantilla :: footer}"></footer>
+
+</body>
+</html>
